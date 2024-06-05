@@ -1,0 +1,38 @@
+2024 funding is being sought particularly in the areas of Internet of Things (IoT) and low-power, low-cost
+technologies toward developing portable, remote, or wearable devices. A wide spectrum of technologies such as
+single board computers (SBCs) like the Raspberry Pi and the Nvidia Jetson Nano and low-power microcontrollers
+such as ESP32 and the Raspberry Pi Pico along with a variety of sensors and actuators are integrated into these
+devices. The SBC-sensor/actuator units programmed to take on the role of either an edge-server or edge-node
+customized to the application being conceived.
+
+The objective of this highly cross-disciplinary research program is to develop technologies that implement an internet-of-things (IoT) framework with robust edge compute methodologies. The
+edge compute will not only involve
+standard algorithms for data analytics but
+also extend to deep learning methods
+with the potential of distributing the
+compute to connected devices within a
+spatio-temporal landscape with multiple
+sensors and actuators located in
+proximity to the data source. The
+research program builds on this idea of
+edge compute particularly on low-cost
+and low-powered devices wherein, the
+edge-server-node configurations will
+optimize the use of on-board computing
+resources to efficiently analyze data and
+transfer them to and from the end-user. A
+variety of communication protocols such
+as Zigbee, Lorawan, WiFi, Bluetooth,
+MQTT etc will be implemented on these
+customized laboratory-scale devices.
+The most recent example of such as a
+system was developed by undergraduate
+students in the Department of Computer
+Science, GWU under the supervision of
+Prof. Kartik Bulusu (See Prior Faculty
+Experience with Supervision of
+Undergraduate Students for details in the students and their affiliations). The device shown in Figure 1 (A-C) is a lowcost,
+wireless data acquisitions system designed for the following applications: (i) Pump and sensor control in a
+temperature and humidity-controlled incubator for cell culture studies and (ii) Remote data acquisition and system
+diagnostics in refrigeration and air conditioning units. For cell-culture applications in incubators, this system
+integrated a dosing pump (Model: EZO-PMP, Atlas Scientific) capable of delivering very small dosages (in the micro-
