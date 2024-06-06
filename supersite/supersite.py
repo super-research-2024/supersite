@@ -1,15 +1,14 @@
 """Welcome to Pynecone! This file outlines the steps to create a basic app."""
 from pcconfig import config
-
+from supersite.functions import *
 import pynecone as pc
 
-devlog = "https://pynecone.io/docs/getting-started/introduction"
+
+log_name = ""
 
 class State(pc.State):
-    """The app state."""
     pass
-
-
+        
 def index():
     return pc.fragment(
         # menu
@@ -32,22 +31,7 @@ def index():
                 href="/about",
                 button=True
             ),
-            # pc.link(
-            #     pc.button(
-            #         pc.menu(
-            #             pc.menu_button("About"),
-            #             pc.menu_list(
-            #                 pc.menu_item("Kartik Bulusu"),
-            #                 pc.menu_item("Nathan Dixon"),
-            #                 pc.menu_item("Gustavo Londono"),
-            #                 pc.menu_item("Rutvik Solanki"),
-            #                 pc.menu_item("Boomika Karuppaiah")
-            #             )
-            #         )
-            #     ),
-            #     href="/about",
-            #     button=True
-            # ),
+
             pc.color_mode_button(pc.color_mode_icon(), float="right"),
             
             spacing="10%",
@@ -83,15 +67,74 @@ def index():
             )
         )
     )
-
-# devlog page
-def devlog():
-    return pc.text("Devlog")
-
+    
 # about page
 def about():
     return pc.text("About")
 
+def set_log_name(log):
+    log_name = log
+    return pc.event("set_log_name", log)
+
+def get_log_name():
+    return log_name
+
+# devlog page
+def devlog():
+    
+    logs = get_names()
+        
+    return pc.fragment(
+        # menu
+        pc.hstack(
+            # home button
+            pc.link(
+                pc.button("Home"),
+                href="/",
+                button=True
+            ),
+            # devlog button
+            pc.link(
+                pc.button("Devlog"),
+                href="/devlog",
+                button=True
+            ),
+            # about button
+            pc.link(
+                pc.button("About"),
+                href="/about",
+                button=True
+            ),
+            pc.color_mode_button(pc.color_mode_icon(), float="right"),
+            
+            spacing="10%",
+            justify="center",
+            padding="3%"
+        ),
+
+        pc.vstack(
+            pc.heading("Development Log", 
+            size="lg",
+            justify="center"
+            ),
+            # for each log, create a clickable card that contains a preview of the log
+            pc.foreach(
+                logs, 
+                lambda log: pc.link(
+                    pc.button(log,
+                              # update state variable with log name
+                              on_click=set_log_name(log)),
+                    href="/log/" + log,
+                    button=True
+                ),
+            )
+        )
+    )
+
+log_names = get_names()
+
+def log():
+    return pc.text(get_log_name())
 
 # Add state and pages to the app.
 app = pc.App(state=State)
@@ -99,5 +142,9 @@ app = pc.App(state=State)
 app.add_page(index, route="/")
 app.add_page(devlog, route="/devlog")
 app.add_page(about, route="/about")
+
+for name in log_names:
+    log_route = "/log/" + name
+    app.add_page(log, route=log_route)
 
 app.compile()
