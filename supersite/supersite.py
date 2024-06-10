@@ -139,7 +139,43 @@ def devlog():
 
 
 def log():
-    return pc.text(State.selected_log)
+    
+    selected = State.selected_log
+    print(selected)
+    
+    return pc.fragment(
+        # menu
+        pc.hstack(
+            # home button
+            pc.link(
+                pc.button("Home"),
+                href="/",
+                button=True
+            ),
+            # devlog button
+            pc.link(
+                pc.button("Devlog"),
+                href="/devlog",
+                button=True
+            ),
+            # about button
+            pc.link(
+                pc.button("About"),
+                href="/about",
+                button=True
+            ),
+            pc.color_mode_button(pc.color_mode_icon(), float="right"),
+            
+            spacing="10%",
+            justify="center",
+            padding="3%"
+        ),
+        pc.vstack(
+            pc.markdown(
+                get_content(selected)
+            )
+        )
+    )
 
 # Add state and pages to the app.
 app = pc.App(state=State)

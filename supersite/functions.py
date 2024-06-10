@@ -11,8 +11,6 @@ def get_log_info():
     
     dict = {}
     
-    # ids = []
-    
     for name in get_names():
         filename = 'logs/' + name
         file = open(filename, 'r')
@@ -29,16 +27,16 @@ def get_log_info():
                 
         
 
-def get_logs():
+def get_content(name):
+    # get all log names and ids
+    # dict = get_log_info()
+    # ids = list(dict.values())
     
-    logs = []
+    # # get log with the id pased in
+    # name = ids.index(id)
+    filename = 'logs/' + name
+    print(filename)
+    file = open(filename, 'r')
     
-    for name in get_names():
-        filename = 'logs/' + name
-        # return file contents
-        file = open(filename, 'r')
-        logs.append(file.read())
-    
-    logs.reverse()
-    return logs
-
+    # return log contents
+    return file.read()
