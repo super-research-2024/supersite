@@ -3,11 +3,20 @@ from pcconfig import config
 from supersite.functions import *
 import pynecone as pc
 
-
-log_name = ""
-
 class State(pc.State):
+    selected_log: str = ""
+    
+    def select(log_name):
+        #print("Selected log: " + log_name)
+        selected_log = log_name
+
+class ButtonState(pc.State):
     pass
+
+        
+log_dict = get_log_info()
+names = list(log_dict.keys())
+ids = list(log_dict.values())
         
 def index():
     return pc.fragment(
@@ -72,17 +81,15 @@ def index():
 def about():
     return pc.text("About")
 
-def set_log_name(log):
-    log_name = log
-    return pc.event("set_log_name", log)
+# def set_log_name(log):
+#     log_name = log
+#     return
 
-def get_log_name():
-    return log_name
+# def get_log_name():
+#     return log_name
 
 # devlog page
 def devlog():
-    
-    logs = get_names()
         
     return pc.fragment(
         # menu
@@ -119,22 +126,20 @@ def devlog():
             ),
             # for each log, create a clickable card that contains a preview of the log
             pc.foreach(
-                logs, 
-                lambda log: pc.link(
-                    pc.button(log,
-                              # update state variable with log name
-                              on_click=set_log_name(log)),
-                    href="/log/" + log,
+                log_dict, 
+                lambda log, id: pc.link(
+                    pc.button(log, 
+                              on_click = State.select(log)),
+                    href="/log/" + (id+1),
                     button=True
                 ),
             )
         )
     )
 
-log_names = get_names()
 
 def log():
-    return pc.text(get_log_name())
+    return pc.text(State.selected_log)
 
 # Add state and pages to the app.
 app = pc.App(state=State)
@@ -143,8 +148,10 @@ app.add_page(index, route="/")
 app.add_page(devlog, route="/devlog")
 app.add_page(about, route="/about")
 
-for name in log_names:
-    log_route = "/log/" + name
+for id in ids:
+    log_route = "/log/" + id
+    print("added", log_route)
     app.add_page(log, route=log_route)
+
 
 app.compile()
