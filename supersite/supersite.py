@@ -128,9 +128,9 @@ def devlog():
             pc.foreach(
                 log_dict, 
                 lambda log, index: pc.link(
-                    pc.button(log, 
-                              on_click = State.select(log)),
-                    href="/log/" + (index+1),
+                    pc.button(log, # button text
+                              on_click = State.select(log)),    # button action
+                    href="/log/" + (index+1),   # link destination
                     button=True
                 ),
             )
