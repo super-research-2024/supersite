@@ -6,9 +6,9 @@ import pynecone as pc
 class State(pc.State):
     selected_log: str = ""
     
-    def select(log_name):
-        #print("Selected log: " + log_name)
-        selected_log = log_name
+    def select(self, log_name):
+        print("Selected log: " + log_name.value)
+        self.selected_log = log_name.value
 
 class ButtonState(pc.State):
     pass
@@ -127,10 +127,10 @@ def devlog():
             # for each log, create a clickable card that contains a preview of the log
             pc.foreach(
                 log_dict, 
-                lambda log, id: pc.link(
+                lambda log, index: pc.link(
                     pc.button(log, 
                               on_click = State.select(log)),
-                    href="/log/" + (id+1),
+                    href="/log/" + (index+1),
                     button=True
                 ),
             )
@@ -140,8 +140,8 @@ def devlog():
 
 def log():
     
-    selected = State.selected_log
-    print(selected)
+    selected = State.selected_log.value
+    print(type(selected))
     
     return pc.fragment(
         # menu
@@ -186,7 +186,7 @@ app.add_page(about, route="/about")
 
 for id in ids:
     log_route = "/log/" + id
-    print("added", log_route)
+    #print("added", log_route)
     app.add_page(log, route=log_route)
 
 

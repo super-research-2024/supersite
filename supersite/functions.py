@@ -22,21 +22,20 @@ def get_log_info():
             # ids.append(id.group(1))
             dict[name] = id.group(1)
       
-    print(dict)      
+    #print(dict)      
     return dict
                 
         
 
 def get_content(name):
-    # get all log names and ids
-    # dict = get_log_info()
-    # ids = list(dict.values())
+    try:
+        filename = 'logs/' + str(name)
+        print(filename)
+        file = open(filename, 'r')
     
-    # # get log with the id pased in
-    # name = ids.index(id)
-    filename = 'logs/' + name
-    print(filename)
-    file = open(filename, 'r')
+        # return log contents
+        return file.read()
     
-    # return log contents
-    return file.read()
+    except FileNotFoundError:
+        print(f"File{name} not found.")
+        return None
