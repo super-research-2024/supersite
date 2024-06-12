@@ -129,7 +129,7 @@ def devlog():
                 log_dict, 
                 lambda log, index: pc.link(
                     pc.button(log, # button text
-                              on_click = State.select(log)),    # button action
+                              on_click = State.select(log)), # button action
                     href="/log/" + (index+1),   # link destination
                     button=True
                 ),
