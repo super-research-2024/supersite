@@ -3,3 +3,4 @@
 pynecone.db
 *.py[cod]
 __pycache__/
+*.zip
