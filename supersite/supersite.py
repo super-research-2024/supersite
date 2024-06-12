@@ -2,21 +2,37 @@
 from pcconfig import config
 from supersite.functions import *
 import pynecone as pc
+import asyncio
 
 class State(pc.State):
-    selected_log: str = ""
+    selected_log: dict = {}
+    log_dict = get_log_info()
+    logs = get_content(log_dict)
+    names = list(log_dict.keys())
+    ids = list(log_dict.values())
+
     
-    def select(self, log_name):
-        print("Selected log: " + log_name.value)
-        self.selected_log = log_name.value
+    async def select(self, log_:list):
+        #print("Selected:", log_[0])
+        self.selected_log['name'] = log_[0]
+        self.selected_log['content'] = self.logs[log_[0]]
+
+    async def refresh_logs(self) -> dict:
+        updated_names = get_names()
+
+        if len(updated_names) > len(self.names):
+            self.log_dict = get_log_info()
+            self.logs = get_content(self.log_dict)
+            self.names = list(self.log_dict.keys())
+            self.ids = list(self.log_dict.values())
+            #print("Logs refreshed")
+        else:
+            #print("Logs not refreshed")
+            return
 
 class ButtonState(pc.State):
-    pass
+    pass 
 
-        
-log_dict = get_log_info()
-names = list(log_dict.keys())
-ids = list(log_dict.values())
         
 def index():
     return pc.fragment(
@@ -130,11 +146,11 @@ def devlog():
             ),
             # for each log, create a clickable card that contains a preview of the log
             pc.foreach(
-                log_dict, 
+                State.log_dict, 
                 lambda log, index: pc.link(
-                    pc.button(log, # button text
-                              on_click = State.select(log)), # button action
-                    href="/log/" + (index+1),   # link destination
+                    pc.button(log),    # button action
+                    href="/log/"+(index+1),   # link destination
+                    on_click = State.select(log),
                     button=True
                 ),
             )
@@ -143,9 +159,6 @@ def devlog():
 
 
 def log():
-    
-    selected = State.selected_log.value
-    print(type(selected))
     
     return pc.fragment(
         # menu
@@ -175,23 +188,19 @@ def log():
             padding="3%"
         ),
         pc.vstack(
-            pc.markdown(
-                get_content(selected)
-            )
+            pc.markdown(State.selected_log['content'])
         )
     )
+    # print("HERE:",State.post_id)
+    # return pc.markdown(State.post_id)
 
 # Add state and pages to the app.
 app = pc.App(state=State)
 
 app.add_page(index, route="/")
-app.add_page(devlog, route="/devlog")
+app.add_page(devlog, route="/devlog", on_load=State.refresh_logs)
+app.add_page(log, route="/log/[pid]")
 app.add_page(about, route="/about")
-
-for id in ids:
-    log_route = "/log/" + id
-    #print("added", log_route)
-    app.add_page(log, route=log_route)
 
 
 app.compile()

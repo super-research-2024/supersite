@@ -7,11 +7,12 @@ def get_names():
     
     return sorted(log_names)
 
-def get_log_info():
+def get_log_info() -> dict:
     
     dict = {}
     
     for name in get_names():
+        #print(name)
         filename = 'logs/' + name
         file = open(filename, 'r')
         content = file.read()
@@ -22,20 +23,25 @@ def get_log_info():
             # ids.append(id.group(1))
             dict[name] = id.group(1)
       
-    #print(dict)      
+    #print(dict)
     return dict
                 
         
 
-def get_content(name):
-    try:
-        filename = 'logs/' + str(name)
-        print(filename)
-        file = open(filename, 'r')
+def get_content(log_info) -> dict:
+
+    dict = {}
     
-        # return log contents
-        return file.read()
+    for filename in log_info:
+        try:
+            path = 'logs/' + str(filename)
+            #print("PATH:",path)
+            file = open(path,'r')
+
+            dict[filename] = file.read()
     
-    except FileNotFoundError:
-        print(f"File{name} not found.")
-        return None
+        except FileNotFoundError:
+            print(f"File{filename} not found.")
+            continue
+
+    return dict
