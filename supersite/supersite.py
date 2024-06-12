@@ -92,7 +92,8 @@ def index():
             ), 
             pc.link(
                 "Components Link",
-                href="https://esphome.io/components/"
+                href="https://esphome.io/components/",
+                padding="3%"
             )
         ) 
     )
@@ -142,16 +143,18 @@ def devlog():
         pc.vstack(
             pc.heading("Development Log", 
             size="lg",
-            justify="center"
+            justify="center",
+            padding="3%"
             ),
             # for each log, create a clickable card that contains a preview of the log
             pc.foreach(
                 State.log_dict, 
                 lambda log, index: pc.link(
-                    pc.button(log),    # button action
+                    pc.button("Log #", index + 1, " - (", log, ")"),    # button action
                     href="/log/"+(index+1),   # link destination
                     on_click = State.select(log),
-                    button=True
+                    button=True,
+                    padding="2%"
                 ),
             )
         )
@@ -188,7 +191,13 @@ def log():
             padding="3%"
         ),
         pc.vstack(
-            pc.markdown(State.selected_log['content'])
+            pc.markdown(State.selected_log['content'],
+                        padding="3%"
+                        ),
+            
+            width="90%",
+            justify="center",
+            spacing="2%"
         )
     )
     # print("HERE:",State.post_id)
