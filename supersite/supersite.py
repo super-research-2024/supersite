@@ -60,7 +60,7 @@ def index():
                 padding="3%"
             ),
             # image 
-            pc.image(src="assets/figure-1.jpg"),
+            # pc.image(src="/assets/figure-1.png"),
             pc.box(
                 pc.span("The objective of this highly cross-disciplinary research program is to develop technologies that implement an internet-of-things (IoT) framework with robust edge compute methodologies. ", font_weight="bold"), "The edge compute will not only involve standard algorithms for data analytics but also extend to deep learning methods with the potential of distributing the compute to connected devices within a spatio-temporal landscape with multiple sensors and actuators located in proximity to the data source. The research program builds on this idea of edge compute particularly on low-cost and low-powered devices wherein, the edge-server-node configurations will optimize the use of on-board computing resources to efficiently analyze data and transfer them to and from the end-user. A variety of communication protocols such as Zigbee, Lorawan, WiFi, Bluetooth, MQTT etc will be implemented on these customized laboratory-scale devices.",
                 size="sm",
@@ -73,8 +73,12 @@ def index():
             pc.text("The overarching goal of the current research program is to create edge-connected devices for which SUPER funds and matching departmental funds are being sought. The funds if made available will support one undergraduate student in the Department of Computer Science, GWU. The research will synergistically couple high-fidelity measurements of biological and environmental particulate transport, low-cost and low power technologies with intelligent edge-compute capabilities and explore this novel area of research. The applications under consideration are non-invasive biosensing and health monitoring, air quality assessments and intelligent transportation.",
                 size="sm",
                 padding="3%"
+            ), 
+            pc.link(
+                "Components Link",
+                href="https://esphome.io/components/"
             )
-        )
+        ) 
     )
     
 # about page
