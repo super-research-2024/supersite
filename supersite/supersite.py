@@ -100,14 +100,42 @@ def index():
     
 # about page
 def about():
-    return pc.text("About")
-
-# def set_log_name(log):
-#     log_name = log
-#     return
-
-# def get_log_name():
-#     return log_name
+    return pc.fragment(
+        # menu
+        pc.hstack(
+            # home button
+            pc.link(
+                pc.button("Home"),
+                href="/",
+                button=True
+            ),
+            # devlog button
+            pc.link(
+                pc.button("Devlog"),
+                href="/devlog",
+                button=True
+            ),
+            # about button
+            pc.link(
+                pc.button("About"),
+                href="/about",
+                button=True
+            ),
+            pc.color_mode_button(pc.color_mode_icon(), float="right"),
+            
+            spacing="10%",
+            justify="center",
+            padding="3%"
+        ),
+        
+        pc.vstack(
+            pc.box(
+                pc.span("Kartik V. Bulusu", font_weight="bold", font_size="lg"),
+                pc.span(": Primary Investigator", font_size="lg")     
+            ),
+            pc.text("Professor Kartik V. Bulusu works on cross-disciplinary areas of teaching and research.  He teaches courses on Python programming on single-board computers, Internet of Things (IoT) and Edge computing. For several years he taught courses for first year engineering students on the engineering applications of Raspberry Pi, Python programming, mobile App development and social innovation. His research interests span two broad areas viz., human health and sustainable energy. He has extensive knowledge of experimental and theoretical fluid mechanics through his training in mechanical engineering. His research work is in the areas of biofluid dynamics of the cardiovasculature, sensors and non-invasive measurement techniques, low-cost energy technologies and applications of wavelet transforms.")
+        )
+    )
 
 # devlog page
 def devlog():
