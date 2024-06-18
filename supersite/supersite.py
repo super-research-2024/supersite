@@ -66,10 +66,10 @@ def index():
         # project description
         pc.vstack(
             pc.heading("Research Experience Edge-Connected Technologies", font_size="xl"),
-            pc.text("Principle Investigator:", size="sm", as_="b"),
+            pc.text("Principal Investigator:", size="sm", as_="b"),
             pc.text("Kartik V. Bulusu", size="sm", as_="i"),
             pc.text("Research Assistants:", size="sm", as_="b"),
-            pc.text("Nathan Dixon (SUPER), Gustavo Londono, Rutvik Solanki, Boomika Karuppaiah", size="sm", as_="i"),
+            pc.text("Nathan Dixon (SUPER Fellow), Gustavo Londono, Rutvik Solanki, Boomika Karuppaiah, Arjun Vora", size="sm", as_="i"),
 
             pc.text("The research work encapsulating one of the National Academy of Engineering’s grand challenges engineering the Tools of Scientific Discovery is one of the overarching thematic areas of research under by supervision. The SUPER 2024 funding is being sought particularly in the areas of Internet of Things (IoT) and low-power, low-cost technologies toward developing portable, remote, or wearable devices. A wide spectrum of technologies such as single board computers (SBCs) like the Raspberry Pi and the Nvidia Jetson Nano and low-power microcontrollers such as ESP32 and the Raspberry Pi Pico along with a variety of sensors and actuators are integrated into these devices. The SBC-sensor/actuator units programmed to take on the role of either an edge-server or edge-node customized to the application being conceived.", 
                 size="sm",
