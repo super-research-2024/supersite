@@ -5,6 +5,7 @@ class SupersiteConfig(pc.Config):
 
 config = SupersiteConfig(
     app_name="supersite",
+    api_url="http://161.253.74.202:8000",
+    bun_path="$HOME/.bun/bin/bun"
     db_url="sqlite:///pynecone.db",
-    env=pc.Env.DEV,
 )
